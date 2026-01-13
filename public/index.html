@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABS AI | Умный ассистент</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <div class="logo-mountains">
+                        <div class="mountain"></div>
+                        <div class="mountain"></div>
+                        <div class="mountain"></div>
+                    </div>
+                    <h1>ABS AI</h1>
+                </div>
+                <button class="btn-new-chat" id="newChatBtn">
+                    <i class="fas fa-plus"></i> Новый чат
+                </button>
+            </div>
+
+            <div class="chat-history" id="chatHistory">
+                <div class="history-title">Сегодня</div>
+                <div class="history-item active">
+                    <i class="fas fa-comment"></i>
+                    <span>Новый диалог</span>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="avatar">A</div>
+                    <div class="user-details">
+                        <span class="username">Пользователь</span>
+                        <span class="status online">Online</span>
+                    </div>
+                </div>
+                <button class="btn-settings" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">
+                    <h2>ABS AI Ассистент</h2>
+                    <div class="status-badge">
+                        <span class="status-dot"></span>
+                        <span>Готов к работе</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-action" title="Темная тема" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="btn-action" title="Поделиться" id="shareBtn">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Chat Container -->
+            <div class="chat-container">
+                <!-- Welcome Screen -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-content">
+                        <div class="welcome-logo">
+                            <div class="logo-mountains large">
+                                <div class="mountain"></div>
+                                <div class="mountain"></div>
+                                <div class="mountain"></div>
+                            </div>
+                        </div>
+                        <h1>Добро пожаловать в ABS AI</h1>
+                        <p class="welcome-subtitle">Ваш умный помощник для любых задач</p>
+                        
+                        <div class="capabilities-grid">
+                            <div class="capability-card" data-prompt="Напиши код на Python для веб-сервера">
+                                <div class="capability-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3>Программирование</h3>
+                                <p>Python, JavaScript, HTML/CSS</p>
+                            </div>
+                            
+                            <div class="capability-card" data-prompt="Объясни квантовую физику простыми словами">
+                                <div class="capability-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <h3>Обучение</h3>
+                                <p>Объяснение сложных тем</p>
+                            </div>
+                            
+                            <div class="capability-card" data-prompt="Помоги составить бизнес-план">
+                                <div class="capability-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <h3>Креатив</h3>
+                                <p>Идеи и планирование</p>
+                            </div>
+                            
+                            <div class="capability-card" data-prompt="Проанализируй эти данные">
+                                <div class="capability-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Анализ</h3>
+                                <p>Данные и статистика</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div class="messages-container" id="messagesContainer"></div>
+            </div>
+
+            <!-- Input Area -->
+            <footer class="input-area">
+                <div class="input-container">
+                    <div class="input-tools">
+                        <button class="tool-btn" title="Прикрепить файл" id="attachBtn">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        <button class="tool-btn" title="Голосовой ввод" id="voiceBtn">
+                            <i class="fas fa-microphone"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="input-wrapper">
+                        <textarea 
+                            id="messageInput" 
+                            placeholder="Напишите сообщение ABS AI..."
+                            rows="1"
+                            autocomplete="off"
+                            spellcheck="true"
+                        ></textarea>
+                        
+                        <div class="suggestions" id="suggestions">
+                            <button class="suggestion-btn" data-text="Напиши код на Python">
+                                <i class="fas fa-code"></i> Код
+                            </button>
+                            <button class="suggestion-btn" data-text="Объясни простыми словами">
+                                <i class="fas fa-lightbulb"></i> Объяснить
+                            </button>
+                            <button class="suggestion-btn" data-text="Переведи на английский">
+                                <i class="fas fa-language"></i> Перевод
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-send" id="sendBtn" title="Отправить (Ctrl+Enter)">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                
+                <div class="input-footer">
+                    <div class="disclaimer">
+                        <i class="fas fa-info-circle"></i>
+                        ABS AI может делать ошибки. Проверяйте важную информацию.
+                    </div>
+                    <div class="shortcuts">
+                        <kbd>Ctrl</kbd> + <kbd>Enter</kbd> - отправить
+                    </div>
+                </div>
+            </footer>
+        </main>
+
+        <!-- Typing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <span>ABS AI печатает ответ...</span>
+        </div>
+
+        <!-- Notifications -->
+        <div class="notification" id="notification"></div>
+
+        <!-- Settings Modal -->
+        <div class="modal-overlay" id="settingsModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3><i class="fas fa-cog"></i> Настройки</h3>
+                    <button class="modal-close" id="closeSettings">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="setting-group">
+                        <label for="apiKey">API Ключ</label>
+                        <div class="input-with-button">
+                            <input type="password" id="apiKey" value="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">
+                            <button class="btn-toggle-visibility" id="toggleApiVisibility">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="setting-hint">Ключ хранится в браузере</small>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>Тема интерфейса</label>
+                        <div class="theme-selector">
+                            <button class="theme-option active" data-theme="dark">
+                                <div class="theme-preview dark"></div>
+                                <span>Тёмная</span>
+                            </button>
+                            <button class="theme-option" data-theme="light">
+                                <div class="theme-preview light"></div>
+                                <span>Светлая</span>
+                            </button>
+                            <button class="theme-option" data-theme="auto">
+                                <div class="theme-preview auto"></div>
+                                <span>Авто</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancelSettings">Отмена</button>
+                    <button class="btn btn-primary" id="saveSettings">Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
